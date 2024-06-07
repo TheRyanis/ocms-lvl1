@@ -30,7 +30,16 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-
+        \Event::listen('backend.menu.extendItems', function($manager) {
+            $manager->addSideMenuItems('RainLab.User', 'user', [
+                'arrivals' => [
+                    'label'       => 'Arrivals',
+                    'icon'        => 'icon-list',
+                    'url'         => \Backend::url('app/arrival/arrivals'),
+                    'permissions' => ['app.arrival.access_arrivals']
+                ]
+            ]);
+        });
     }
 
     /**
@@ -50,7 +59,6 @@ class Plugin extends PluginBase
      */
     public function registerComponents()
     {
-        return []; // Remove this line to activate
 
         return [
             'App\Arrival\Components\MyComponent' => 'myComponent',
@@ -64,12 +72,10 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
-            'app.arrival.some_permission' => [
-                'tab' => 'Arrival',
-                'label' => 'Some permission'
+            'app.arrival.access_arrivals' => [
+                'label' => 'Access Arrivals',
+                'tab' => 'Arrival'
             ],
         ];
     }
@@ -81,14 +87,13 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
 
         return [
             'arrival' => [
                 'label'       => 'Arrival',
                 'url'         => Backend::url('app/arrival/mycontroller'),
                 'icon'        => 'icon-leaf',
-                'permissions' => ['app.arrival.*'],
+                'permissions' => ['app.arrival.access_arrivals'],
                 'order'       => 500,
             ],
         ];
