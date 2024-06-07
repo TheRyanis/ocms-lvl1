@@ -1,0 +1,12 @@
+list: $/app/arrivals/models/arrival/columns.yaml
+modelClass: App\Arrivals\Models\Arrival
+title: Arrivals
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'app/arrivals/arrivals/update/:id'

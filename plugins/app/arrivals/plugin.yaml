@@ -1,0 +1,11 @@
+plugin:
+    name: 'app.arrivals::lang.plugin.name'
+    description: 'app.arrivals::lang.plugin.description'
+    author: App
+    icon: oc-icon-clock-o
+    homepage: ''
+navigation:
+    arrivals:
+        label: Arrivals
+        url: app/arrivals/arrivals_new
+        icon: icon-clock-o

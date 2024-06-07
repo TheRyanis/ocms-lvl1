@@ -1,0 +1,10 @@
+name: Arrivals_new
+form: $/app/arrivals/models/arrival/fields.yaml
+modelClass: App\Arrivals\Models\Arrival
+defaultRedirect: app/arrivals/arrivals_new
+create:
+    redirect: 'app/arrivals/arrivals_new/update/:id'
+    redirectClose: app/arrivals/arrivals_new
+update:
+    redirect: app/arrivals/arrivals_new
+    redirectClose: app/arrivals/arrivals_new

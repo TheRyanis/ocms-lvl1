@@ -1,14 +1,9 @@
-# ===================================
-#  Form Field Definitions
-# ===================================
-
 fields:
-    id:
-        label: ID
-        disabled: true
     name:
-        label: name
+        label: Name
+        span: auto
         type: text
-    arrival_time:
-        label: Arrival Time
-        type: datetime
+    reason:
+        label: Text
+        span: auto
+        type: text
