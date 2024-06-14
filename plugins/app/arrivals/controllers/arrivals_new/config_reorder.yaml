@@ -1,4 +1,0 @@
-title: Arrivals_new
-modelClass: App\Arrivals\Models\Arrival
-toolbar:
-    buttons: reorder_toolbar

@@ -1,9 +1,0 @@
-fields:
-    name:
-        label: Name
-        span: auto
-        type: text
-    reason:
-        label: Text
-        span: auto
-        type: text
