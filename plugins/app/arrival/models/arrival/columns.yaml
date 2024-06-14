@@ -11,6 +11,9 @@ columns:
         searchable: true
         sortable: true
     arrival_time:
-        label: Arrival time
+        label: Arrival Time
         type: datetime
         format: 'Y-m-d H:i:s'
+        searchable: false
+        sortable: true
+

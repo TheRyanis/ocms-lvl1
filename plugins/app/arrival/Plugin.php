@@ -80,7 +80,7 @@ class Plugin extends PluginBase
         return [
             'arrival' => [
                 'label'       => 'Arrival',
-                'url'         => Backend::url('app/arrival/Arrivals'),
+                'url'         => Backend::url('app/arrival/arrivals'),
                 'icon'        => 'icon-calendar-check-o',
                 'permissions' => ['app.arrival.manage_arrivals'],
                 'order'       => 500,

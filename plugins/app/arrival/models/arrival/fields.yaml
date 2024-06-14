@@ -10,7 +10,4 @@ fields:
         label: Name
         type: text
         span: auto
-    arrival_time:
-        label: Arrival Time
-        type: datetimepicker
-        span: auto
+
