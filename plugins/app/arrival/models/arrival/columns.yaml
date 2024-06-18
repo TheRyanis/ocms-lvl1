@@ -16,4 +16,6 @@ columns:
         format: 'Y-m-d H:i:s'
         searchable: false
         sortable: true
-
+    is_late:
+        label: Is Late
+        type: switch

@@ -22,7 +22,7 @@ class Arrival extends Model
     /**
      * @var array fillable attributes are mass assignable
      */
-    protected $fillable = ['name', 'arrival_time'];
+    protected $fillable = ['name', 'arrival_time', 'is_late'];
 
     /**
      * @var array rules for validation
@@ -69,4 +69,6 @@ class Arrival extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+
 }
