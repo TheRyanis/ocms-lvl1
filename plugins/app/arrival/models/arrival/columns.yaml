@@ -19,3 +19,6 @@ columns:
     is_late:
         label: Is Late
         type: switch
+        span: auto
+        readOnly: true
+

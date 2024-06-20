@@ -30,17 +30,6 @@ class Arrivals extends Controller
     public function __construct()
     {
         parent::__construct();
-
         BackendMenu::setContext('App.Arrival', 'arrival', 'arrivals');
-    }
-
-    public function formAfterSave(Arrival $model) {
-        $timezone = new \DateTimeZone('CET');
-        $timestamp = new \DateTime('now', $timezone);
-        $lateTime = new \DateTime('08:00:00', $timezone);
-        $isLate = $model->logged_at > $lateTime;
-
-        $model->is_late = $isLate;
-        $model->save();
     }
 }

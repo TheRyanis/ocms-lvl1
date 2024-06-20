@@ -1,7 +1,8 @@
 <?php namespace App\Arrival\Models;
 
 use Model;
-
+use DateTime;
+use DateTimeZone;
 /**
  * Arrival Model
  */
@@ -23,6 +24,14 @@ class Arrival extends Model
      * @var array fillable attributes are mass assignable
      */
     protected $fillable = ['name', 'arrival_time', 'is_late'];
+
+    public function beforeSave()
+    {
+        $timezone = new DateTimeZone('CET');
+        $timestamp = new DateTime('now', $timezone);
+        $lateTime = new DateTime('08:00:00', $timezone);
+        $this->is_late = $timestamp > $lateTime;
+    }
 
     /**
      * @var array rules for validation
