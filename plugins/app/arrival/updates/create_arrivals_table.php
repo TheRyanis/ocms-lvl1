@@ -15,7 +15,7 @@ class CreateArrivalsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->timestamp('arrival_time');
-            $table->boolean('is_late')->default(false);
+            $table->boolean('is_late');
             $table->timestamps();
         });
     }

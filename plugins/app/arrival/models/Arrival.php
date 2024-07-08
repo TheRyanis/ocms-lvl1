@@ -25,12 +25,12 @@ class Arrival extends Model
      */
     protected $fillable = ['name', 'arrival_time', 'is_late'];
 
-    public function beforeSave()
+    public function isLate()
     {
         $timezone = new DateTimeZone('CET');
-        $timestamp = new DateTime('now', $timezone);
+        $arrivalTime = new DateTime($this->arrival_time, $timezone);
         $lateTime = new DateTime('08:00:00', $timezone);
-        $this->is_late = $timestamp > $lateTime;
+        return $arrivalTime > $lateTime;
     }
 
     /**
@@ -51,7 +51,7 @@ class Arrival extends Model
     /**
      * @var array appends attributes to the API representation of the model (ex. toArray())
      */
-    protected $appends = [];
+    protected $appends = ['is_late'];
 
     /**
      * @var array hidden attributes removed from the API representation of the model (ex. toArray())
@@ -63,7 +63,8 @@ class Arrival extends Model
      */
     protected $dates = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'arrival_time'
     ];
 
     /**
