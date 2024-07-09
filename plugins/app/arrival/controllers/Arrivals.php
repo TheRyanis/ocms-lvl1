@@ -32,11 +32,4 @@ class Arrivals extends Controller
         parent::__construct();
         BackendMenu::setContext('App.Arrival', 'arrival', 'arrivals');
     }
-
-    public function listOverrideColumnValue($record, $columnName)
-    {
-        if ($columnName == 'is_late') {
-            return $record->isLate() ? 'Yes' : 'No';
-        }
-    }
 }

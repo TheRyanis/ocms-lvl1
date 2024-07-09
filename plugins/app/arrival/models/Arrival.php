@@ -25,12 +25,12 @@ class Arrival extends Model
      */
     protected $fillable = ['name', 'arrival_time', 'is_late'];
 
-    public function isLate()
+    public function getIsLateAttribute(): string
     {
         $timezone = new DateTimeZone('CET');
         $arrivalTime = new DateTime($this->arrival_time, $timezone);
         $lateTime = new DateTime('08:00:00', $timezone);
-        return $arrivalTime > $lateTime;
+        return ($arrivalTime > $lateTime) ? 'Yes' : 'No';
     }
 
     /**

@@ -21,4 +21,3 @@ columns:
         type: text
         sortable: true
         searchType: false
-        valueFrom: isLate
