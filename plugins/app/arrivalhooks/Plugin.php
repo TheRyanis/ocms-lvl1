@@ -1,10 +1,11 @@
-<?php namespace App\Arrival;
+<?php namespace App\ArrivalHooks;
 
+use App\Arrival\Models\Arrival;
 use Backend;
 use System\Classes\PluginBase;
 
 /**
- * Arrival Plugin Information File
+ * ArrivalHooks Plugin Information File
  */
 class Plugin extends PluginBase
 {
@@ -16,10 +17,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Arrival',
-            'description' => 'A plugin to log student arrivals.',
-            'author'      => 'app',
-            'icon'        => 'icon-calendar-check-o'
+            'name'        => 'ArrivalHooks',
+            'description' => 'No description provided yet...',
+            'author'      => 'App',
+            'icon'        => 'icon-leaf'
         ];
     }
 
@@ -30,10 +31,7 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        \Route::group(['prefix' => 'api'], function () {
-            \Route::get('arrivals', 'App\Arrival\Classes\ArrivalAPI@getArrivals');
-            \Route::post('arrivals', 'App\Arrival\Classes\ArrivalAPI@createArrival');
-        });
+
     }
 
     /**
@@ -43,11 +41,10 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        \App::bind('arrival', function() {
-            return new \App\Arrival\Classes\ArrivalAPI();
+        Arrival::created(function ($arrival) {
+            \Log::info('New arrival created: ' . $arrival->name);
         });
     }
-
     /**
      * Registers any back-end permissions used by this plugin.
      *
@@ -57,9 +54,9 @@ class Plugin extends PluginBase
     {
 
         return [
-            'app.arrival.some_permission' => [
-                'tab' => 'Arrival',
-                'label' => 'Manage Arrivals'
+            'app.arrivalhooks.some_permission' => [
+                'tab' => 'ArrivalHooks',
+                'label' => 'Some permission'
             ],
         ];
     }
@@ -73,11 +70,11 @@ class Plugin extends PluginBase
     {
 
         return [
-            'arrival' => [
-                'label'       => 'Arrival',
-                'url'         => Backend::url('app/arrival/arrivals'),
-                'icon'        => 'icon-calendar-check-o',
-                'permissions' => ['app.arrival.manage_arrivals'],
+            'arrivalhooks' => [
+                'label'       => 'ArrivalHooks',
+                'url'         => Backend::url('app/arrivalhooks/mycontroller'),
+                'icon'        => 'icon-leaf',
+                'permissions' => ['app.arrivalhooks.*'],
                 'order'       => 500,
             ],
         ];
