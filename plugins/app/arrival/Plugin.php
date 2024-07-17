@@ -2,6 +2,8 @@
 
 use Backend;
 use System\Classes\PluginBase;
+use App\Arrival\Models\Arrival;
+use Illuminate\Support\Facades\Event;
 
 /**
  * Arrival Plugin Information File
@@ -43,8 +45,14 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        \App::bind('arrival', function() {
-            return new \App\Arrival\Classes\ArrivalAPI();
+        if (file_exists(__DIR__ . '/routes.php')) {
+            require __DIR__ . '/routes.php';
+        }
+
+        Arrival::extend(function ($model) {
+            $model->bindEvent('model.afterCreate', function () use ($model) {
+                \Log::info('New arrival created: ' . $model->name);
+            });
         });
     }
 
