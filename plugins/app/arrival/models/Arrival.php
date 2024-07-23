@@ -3,70 +3,23 @@
 use Model;
 use DateTime;
 use DateTimeZone;
+use October\Rain\Database\Traits\Validation;
+
 /**
  * Arrival Model
  */
 class Arrival extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use Validation;
 
     /**
      * @var string table associated with the model
      */
     public $table = 'app_arrival_arrivals';
-
-    /**
-     * @var array guarded attributes aren't mass assignable
-     */
-    protected $guarded = ['*'];
-
-    /**
-     * @var array fillable attributes are mass assignable
-     */
-    protected $fillable = ['name', 'arrival_time', 'is_late'];
-
-    public function getIsLateAttribute(): string
-    {
-        $timezone = new DateTimeZone('CET');
-        $arrivalTime = new DateTime($this->arrival_time, $timezone);
-        $lateTime = new DateTime('08:00:00', $timezone);
-        return ($arrivalTime > $lateTime) ? 'Yes' : 'No';
-    }
-
     /**
      * @var array rules for validation
      */
     public $rules = [];
-
-    /**
-     * @var array Attributes to be cast to native types
-     */
-    protected $casts = [];
-
-    /**
-     * @var array jsonable attribute names that are json encoded and decoded from the database
-     */
-    protected $jsonable = [];
-
-    /**
-     * @var array appends attributes to the API representation of the model (ex. toArray())
-     */
-    protected $appends = ['is_late'];
-
-    /**
-     * @var array hidden attributes removed from the API representation of the model (ex. toArray())
-     */
-    protected $hidden = [];
-
-    /**
-     * @var array dates attributes that should be mutated to dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'arrival_time'
-    ];
-
     /**
      * @var array hasOne and other relations
      */
@@ -79,6 +32,46 @@ class Arrival extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+    /**
+     * @var array guarded attributes aren't mass assignable
+     */
+    protected $guarded = ['*'];
+    /**
+     * @var array fillable attributes are mass assignable
+     */
+    protected $fillable = ['name', 'arrival_time', 'is_late'];
+    /**
+     * @var array Attributes to be cast to native types
+     */
+    protected $casts = [];
+    /**
+     * @var array jsonable attribute names that are json encoded and decoded from the database
+     */
+    protected $jsonable = [];
+    /**
+     * @var array appends attributes to the API representation of the model (ex. toArray())
+     */
+    protected $appends = ['is_late'];
+    /**
+     * @var array hidden attributes removed from the API representation of the model (ex. toArray())
+     */
+    protected $hidden = [];
+    /**
+     * @var array dates attributes that should be mutated to dates
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'arrival_time'
+    ];
+
+    public function getIsLateAttribute(): string
+    {
+        $timezone = new DateTimeZone('CET');
+        $arrivalTime = new DateTime($this->arrival_time, $timezone);
+        $lateTime = new DateTime('08:00:00', $timezone);
+        return ($arrivalTime > $lateTime) ? 'Yes' : 'No';
+    }
 
 
 }

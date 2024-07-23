@@ -2,6 +2,7 @@
 
 use App\Arrival\Models\Arrival;
 use Backend;
+use Log;
 use System\Classes\PluginBase;
 
 /**
@@ -17,10 +18,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'arrivalTime',
+            'name' => 'arrivalTime',
             'description' => 'No description provided yet...',
-            'author'      => 'app',
-            'icon'        => 'icon-leaf'
+            'author' => 'app',
+            'icon' => 'icon-leaf'
         ];
     }
 
@@ -42,7 +43,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         Arrival::created(function ($arrival) {
-            \Log::info('New arrival created: ' . $arrival->name);
+            Log::info('New arrival created: ' . $arrival->name);
         });
     }
 
@@ -73,11 +74,11 @@ class Plugin extends PluginBase
 
         return [
             'arrivaltime' => [
-                'label'       => 'arrivalTime',
-                'url'         => Backend::url('app/arrivaltime/mycontroller'),
-                'icon'        => 'icon-leaf',
+                'label' => 'arrivalTime',
+                'url' => Backend::url('app/arrivaltime/mycontroller'),
+                'icon' => 'icon-leaf',
                 'permissions' => ['app.arrivaltime.*'],
-                'order'       => 500,
+                'order' => 500,
             ],
         ];
     }

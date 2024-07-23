@@ -1,6 +1,8 @@
 <?php namespace App\Arrival\Controllers;
 
 use App\Arrival\Models\Arrival;
+use Backend\Behaviors\FormController;
+use Backend\Behaviors\ListController;
 use BackendMenu;
 use Backend\Classes\Controller;
 
@@ -10,8 +12,8 @@ use Backend\Classes\Controller;
 class Arrivals extends Controller
 {
     public $implement = [
-        \Backend\Behaviors\FormController::class,
-        \Backend\Behaviors\ListController::class
+        FormController::class,
+        ListController::class
     ];
 
     /**

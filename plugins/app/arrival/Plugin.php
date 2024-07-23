@@ -1,6 +1,8 @@
 <?php namespace App\Arrival;
 
 use Backend;
+use Log;
+use Route;
 use System\Classes\PluginBase;
 use App\Arrival\Models\Arrival;
 use Illuminate\Support\Facades\Event;
@@ -18,10 +20,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Arrival',
+            'name' => 'Arrival',
             'description' => 'A plugin to log student arrivals.',
-            'author'      => 'app',
-            'icon'        => 'icon-calendar-check-o'
+            'author' => 'app',
+            'icon' => 'icon-calendar-check-o'
         ];
     }
 
@@ -32,9 +34,9 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        \Route::group(['prefix' => 'api'], function () {
-            \Route::get('arrivals', 'App\Arrival\Classes\ArrivalAPI@getArrivals');
-            \Route::post('arrivals', 'App\Arrival\Classes\ArrivalAPI@createArrival');
+        Route::group(['prefix' => 'api'], function () {
+            Route::get('arrivals', 'App\Arrival\Classes\ArrivalAPI@getArrivals');
+            Route::post('arrivals', 'App\Arrival\Classes\ArrivalAPI@createArrival');
         });
     }
 
@@ -51,7 +53,7 @@ class Plugin extends PluginBase
 
         Arrival::extend(function ($model) {
             $model->bindEvent('model.afterCreate', function () use ($model) {
-                \Log::info('New arrival created: ' . $model->name);
+                Log::info('New arrival created: ' . $model->name);
             });
         });
     }
@@ -82,11 +84,11 @@ class Plugin extends PluginBase
 
         return [
             'arrival' => [
-                'label'       => 'Arrival',
-                'url'         => Backend::url('app/arrival/arrivals'),
-                'icon'        => 'icon-calendar-check-o',
+                'label' => 'Arrival',
+                'url' => Backend::url('app/arrival/arrivals'),
+                'icon' => 'icon-calendar-check-o',
                 'permissions' => ['app.arrival.manage_arrivals'],
-                'order'       => 500,
+                'order' => 500,
             ],
         ];
     }
